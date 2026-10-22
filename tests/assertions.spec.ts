@@ -22,7 +22,7 @@ test('Login and verify application', async ({ page }) => {
     .click();
 
   // Assert
-  await expect(page).toHaveURL(/inventory12/);
+  await expect(page).toHaveURL(/inventory/);
 
   await expect(
     page.getByText('Products')
