@@ -32,6 +32,7 @@ test('PU-002 Sorting Z–A puts the last product first', async ({ inventoryPage 
 });
 
 test('PU-003 Opening the Backpack name shows its details', async ({
+  page,
   inventoryPage,
   productDetailsPage
 }) => {
@@ -39,6 +40,9 @@ test('PU-003 Opening the Backpack name shows its details', async ({
 
   await inventoryPage.openProduct('Sauce Labs Backpack');
 
+  // Pin the failure reason: first check we navigated to the Backpack's own page (id=4).
+  // Observed defect: Firefox/WebKit open id=5 (Fleece Jacket); Chromium stays on /inventory.html.
+  await expect(page).toHaveURL(/inventory-item\.html\?id=4/);
   await expect(productDetailsPage.productName).toHaveText('Sauce Labs Backpack');
 });
 
